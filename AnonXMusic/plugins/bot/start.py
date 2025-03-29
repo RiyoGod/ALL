@@ -6,10 +6,10 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from youtubesearchpython.__future__ import VideosSearch
 
 import config
-from AnonXMusic import app
-from AnonXMusic.misc import _boot_
-from AnonXMusic.plugins.sudo.sudoers import sudoers_list
-from AnonXMusic.utils.database import (
+from AviaXMusic import app
+from AviaXMusic.misc import _boot_
+from AviaXMusic.plugins.sudo.sudoers import sudoers_list
+from AviaXMusic.utils.database import (
     add_served_chat,
     add_served_user,
     blacklisted_chats,
@@ -17,21 +17,18 @@ from AnonXMusic.utils.database import (
     is_banned_user,
     is_on_off,
 )
-from AnonXMusic.utils.decorators.language import LanguageStart
-from AnonXMusic.utils.formatters import get_readable_time
-from AnonXMusic.utils.inline import help_pannel, private_panel, start_panel
+from AviaXMusic.utils.decorators.language import LanguageStart
+from AviaXMusic.utils.formatters import get_readable_time
+from AviaXMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
 # 📌 Random Start Images
 START_IMAGES = [
-    "https://files.catbox.moe/tycblb.jpg",
-    "https://files.catbox.moe/6eisf0.jpg",
-    "https://files.catbox.moe/31xhoe.jpg",
-    "https://files.catbox.moe/enj0uu.jpg",
-    "https://files.catbox.moe/k8kj67.jpg",
-    "https://files.catbox.moe/i87dkb.jpg",
-    "https://files.catbox.moe/zwdy84.jpg",
+    "https://i.ibb.co/8gvkHH8M/photo-2025-03-29-17-50-29-7487290498546139140.jpg",
+    "https://i.ibb.co/dw741J0T/photo-2025-03-29-17-50-29-7487290391171956752.jpg",
+    "https://i.ibb.co/d0qs1gXt/photo-2025-03-29-17-50-29-7487290442711564292.jpg",
+    "https://i.ibb.co/67s6C3QQ/photo-2025-03-29-17-50-29-7487290554380713992.jpg",
 ]
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
