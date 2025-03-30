@@ -1,4 +1,5 @@
-import random from typing import Union
+import random
+from typing import Union
 
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
