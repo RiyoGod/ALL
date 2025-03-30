@@ -1,4 +1,8 @@
-from typing import Union from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup from AnonXMusic import app
+from typing import Union
+
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+
+from AnonXMusic import app
 
 def help_pannel(, page: int = 0, START: Union[bool, int] = None): first = [InlineKeyboardButton(text=["CLOSE_BUTTON"], callback_data="close")] second = [InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data="settingsback_helper")] mark = second if START else first
 
