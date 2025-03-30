@@ -23,23 +23,27 @@ from AnonXMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
-# 📌 Random Start Images
+# ðŸ“Œ 7 Start Images (Random Selection)
 START_IMAGES = [
-    "https://i.ibb.co/8gvkHH8M/photo-2025-03-29-17-50-29-7487290498546139140.jpg",
-    "https://i.ibb.co/dw741J0T/photo-2025-03-29-17-50-29-7487290391171956752.jpg",
-    "https://i.ibb.co/d0qs1gXt/photo-2025-03-29-17-50-29-7487290442711564292.jpg",
-    "https://i.ibb.co/67s6C3QQ/photo-2025-03-29-17-50-29-7487290554380713992.jpg",
+    "https://files.catbox.moe/tycblb.jpg",
+    "https://files.catbox.moe/6eisf0.jpg",
+    "https://files.catbox.moe/31xhoe.jpg",
+    "https://files.catbox.moe/enj0uu.jpg",
+    "https://files.catbox.moe/k8kj67.jpg",
+    "https://files.catbox.moe/i87dkb.jpg",
+    "https://files.catbox.moe/zwdy84.jpg",
 ]
 
 @app.on_message(filters.command(["start"]) & filters.private & ~BANNED_USERS)
 @LanguageStart
 async def start_pm(client, message: Message, _):
     await add_served_user(message.from_user.id)
+    
+    # Random Start Image Selection
     start_image = random.choice(START_IMAGES)
 
-    args = message.text.split()
-    if len(args) > 1:
-        name = args[1]
+    if len(message.text.split()) > 1:
+        name = message.text.split(None, 1)[1]
 
         if name.startswith("help"):
             keyboard = help_pannel(_)
@@ -54,34 +58,33 @@ async def start_pm(client, message: Message, _):
             if await is_on_off(2):
                 return await app.send_message(
                     chat_id=config.LOGGER_ID,
-                    text=f"**{message.from_user.mention} ᴊᴜsᴛ ᴄʜᴇᴄᴋᴇᴅ sᴜᴅᴏʟɪsᴛ.**\n\n"
-                         f"<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n"
-                         f"<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+                    text=f"{message.from_user.mention} checked <b>sudolist</b>.\n\n"
+                         f"<b>User ID:</b> <code>{message.from_user.id}</code>\n"
+                         f"<b>Username:</b> @{message.from_user.username}",
                 )
             return
 
         if name.startswith("inf"):
-            m = await message.reply_text("🔎 Searching...")
+            m = await message.reply_text("ðŸ”Ž Searching...")
             query = f"https://www.youtube.com/watch?v={name.replace('info_', '', 1)}"
             results = VideosSearch(query, limit=1)
-            result_data = (await results.next())["result"]
 
-            if not result_data:
-                return await m.edit("❌ No results found.")
+            for result in (await results.next())["result"]:
+                title = result["title"]
+                duration = result["duration"]
+                views = result["viewCount"]["short"]
+                thumbnail = result["thumbnails"][0]["url"].split("?")[0]
+                channellink = result["channel"]["link"]
+                channel = result["channel"]["name"]
+                link = result["link"]
+                published = result["publishedTime"]
 
-            result = result_data[0]
             searched_text = _["start_6"].format(
-                result["title"],
-                result["duration"],
-                result["viewCount"]["short"],
-                result["publishedTime"],
-                result["channel"]["link"],
-                result["channel"]["name"],
-                app.mention,
+                title, duration, views, published, channellink, channel, app.mention
             )
             key = InlineKeyboardMarkup(
                 [[
-                    InlineKeyboardButton(text=_["S_B_8"], url=result["link"]),
+                    InlineKeyboardButton(text=_["S_B_8"], url=link),
                     InlineKeyboardButton(text=_["S_B_9"], url=config.SUPPORT_CHAT),
                 ]]
             )
@@ -89,33 +92,34 @@ async def start_pm(client, message: Message, _):
             await m.delete()
             await app.send_photo(
                 chat_id=message.chat.id,
-                photo=result["thumbnails"][0]["url"].split("?")[0],
+                photo=thumbnail,
                 caption=searched_text,
                 reply_markup=key,
             )
             return
 
-    # Default start message
-    out = private_panel(_)
-    await message.reply_photo(
-        photo=start_image,
-        caption=_["start_2"].format(message.from_user.mention, app.mention),
-        reply_markup=InlineKeyboardMarkup(out),
-    )
-    
-    if await is_on_off(2):
-        return await app.send_message(
-            chat_id=config.LOGGER_ID,
-            text=f"<b>{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.</b>\n\n"
-                 f"<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n"
-                 f"<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+    else:
+        out = private_panel(_)
+        await message.reply_photo(
+            photo=start_image,
+            caption=_["start_2"].format(message.from_user.mention, app.mention),
+            reply_markup=InlineKeyboardMarkup(out),
         )
+        if await is_on_off(2):
+            return await app.send_message(
+                chat_id=config.LOGGER_ID,
+                text=f"{message.from_user.mention} started the bot.\n\n"
+                     f"<b>User ID:</b> <code>{message.from_user.id}</code>\n"
+                     f"<b>Username:</b> @{message.from_user.username}",
+            )
 
 @app.on_message(filters.command(["start"]) & filters.group & ~BANNED_USERS)
 @LanguageStart
 async def start_gp(client, message: Message, _):
     out = start_panel(_)
     uptime = int(time.time() - _boot_)
+    
+    # Random Start Image Selection
     start_image = random.choice(START_IMAGES)
 
     await message.reply_photo(
@@ -155,6 +159,8 @@ async def welcome(client, message: Message):
                     return await app.leave_chat(message.chat.id)
 
                 out = start_panel(_)
+
+                # Random Start Image Selection
                 start_image = random.choice(START_IMAGES)
 
                 await message.reply_photo(
