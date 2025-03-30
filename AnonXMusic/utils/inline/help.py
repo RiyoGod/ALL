@@ -4,9 +4,10 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 from AnonXMusic import app
 
-def help_pannel(, page: int = 0, START: Union[bool, int] = None): first = [InlineKeyboardButton(text=["CLOSE_BUTTON"], callback_data="close")] second = [InlineKeyboardButton(text=_["BACK_BUTTON"], callback_data="settingsback_helper")] mark = second if START else first
+def help_pannel(, page: int = 0, START: Union[bool, int] = None): first = [InlineKeyboardButton(text=["CLOSE_BUTTON"], callback_data="close")] second = [ InlineKeyboardButton( text=_["BACK_BUTTON"], callback_data="settingsback_helper", ), ] mark = second if START else first
 
-pages = [
+buttons_pages = [
+    # Page 1
     [
         InlineKeyboardButton(text=_["H_B_1"], callback_data="help_callback hb1"),
         InlineKeyboardButton(text=_["H_B_2"], callback_data="help_callback hb2"),
@@ -32,46 +33,43 @@ pages = [
         InlineKeyboardButton(text=_["H_B_14"], callback_data="help_callback hb14"),
         InlineKeyboardButton(text=_["H_B_15"], callback_data="help_callback hb15"),
     ],
+    # Page 2
+    [
+        InlineKeyboardButton(text=_["H_B_16"], callback_data="help_callback hb16"),
+        InlineKeyboardButton(text=_["H_B_17"], callback_data="help_callback hb17"),
+        InlineKeyboardButton(text=_["H_B_18"], callback_data="help_callback hb18"),
+    ],
+    [
+        InlineKeyboardButton(text=_["H_B_19"], callback_data="help_callback hb19"),
+        InlineKeyboardButton(text=_["H_B_20"], callback_data="help_callback hb20"),
+        InlineKeyboardButton(text=_["H_B_21"], callback_data="help_callback hb21"),
+    ],
+    [
+        InlineKeyboardButton(text=_["H_B_22"], callback_data="help_callback hb22"),
+        InlineKeyboardButton(text=_["H_B_23"], callback_data="help_callback hb23"),
+        InlineKeyboardButton(text=_["H_B_24"], callback_data="help_callback hb24"),
+    ],
+    [
+        InlineKeyboardButton(text=_["H_B_25"], callback_data="help_callback hb25"),
+        InlineKeyboardButton(text=_["H_B_26"], callback_data="help_callback hb26"),
+        InlineKeyboardButton(text=_["H_B_27"], callback_data="help_callback hb27"),
+    ],
+    [
+        InlineKeyboardButton(text=_["H_B_28"], callback_data="help_callback hb28"),
+        InlineKeyboardButton(text=_["H_B_29"], callback_data="help_callback hb29"),
+        InlineKeyboardButton(text=_["H_B_30"], callback_data="help_callback hb30"),
+    ],
 ]
 
-if page == 1:
-    pages = [
-        [
-            InlineKeyboardButton(text=_["H_B_16"], callback_data="help_callback hb16"),
-            InlineKeyboardButton(text=_["H_B_17"], callback_data="help_callback hb17"),
-            InlineKeyboardButton(text=_["H_B_18"], callback_data="help_callback hb18"),
-        ],
-        [
-            InlineKeyboardButton(text=_["H_B_19"], callback_data="help_callback hb19"),
-            InlineKeyboardButton(text=_["H_B_20"], callback_data="help_callback hb20"),
-            InlineKeyboardButton(text=_["H_B_21"], callback_data="help_callback hb21"),
-        ],
-        [
-            InlineKeyboardButton(text=_["H_B_22"], callback_data="help_callback hb22"),
-            InlineKeyboardButton(text=_["H_B_23"], callback_data="help_callback hb23"),
-            InlineKeyboardButton(text=_["H_B_24"], callback_data="help_callback hb24"),
-        ],
-        [
-            InlineKeyboardButton(text=_["H_B_25"], callback_data="help_callback hb25"),
-            InlineKeyboardButton(text=_["H_B_26"], callback_data="help_callback hb26"),
-            InlineKeyboardButton(text=_["H_B_27"], callback_data="help_callback hb27"),
-        ],
-        [
-            InlineKeyboardButton(text=_["H_B_28"], callback_data="help_callback hb28"),
-            InlineKeyboardButton(text=_["H_B_29"], callback_data="help_callback hb29"),
-            InlineKeyboardButton(text=_["H_B_30"], callback_data="help_callback hb30"),
-        ],
-    ]
+navigation_buttons = []
+if page > 0:
+    navigation_buttons.append(InlineKeyboardButton(text=_["PREV_BUTTON"], callback_data=f"help_page {page - 1}"))
+if page < 1:  # Since there are two pages (0 and 1)
+    navigation_buttons.append(InlineKeyboardButton(text=_["NEXT_BUTTON"], callback_data=f"help_page {page + 1}"))
 
-navigation = []
-if page == 0:
-    navigation.append(InlineKeyboardButton(text="Next", callback_data="help_page_1"))
-elif page == 1:
-    navigation.append(InlineKeyboardButton(text="Back", callback_data="help_page_0"))
+return InlineKeyboardMarkup(buttons_pages[page * 5: (page + 1) * 5] + [navigation_buttons] + [mark])
 
-return InlineKeyboardMarkup(pages + [navigation] + [mark])
+def help_back_markup(): return InlineKeyboardMarkup( [ [ InlineKeyboardButton( text=["BACK_BUTTON"], callback_data="settings_back_helper", ), ] ] )
 
-def help_back_markup(): return InlineKeyboardMarkup( [[InlineKeyboardButton(text=["BACK_BUTTON"], callback_data="settings_back_helper")]] )
-
-def private_help_panel(): return [[InlineKeyboardButton(text=["S_B_4"], url=f"https://t.me/{app.username}?start=help")]]
+def private_help_panel(): return [ [ InlineKeyboardButton( text=["S_B_4"], url=f"https://t.me/{app.username}?start=help", ), ], ]
 
