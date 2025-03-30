@@ -52,7 +52,7 @@ nav_buttons = []
 if page > 0:
     nav_buttons.append(InlineKeyboardButton(text="<< ʙᴀᴄᴋ", callback_data=f"help_page {page - 1}"))
 if page < total_pages - 1:
-    nav_buttons.append(InlineKeyboardButton(text="ɴᴇxᴛ >> , callback_data=f"help_page {page + 1}"))
+    nav_buttons.append(InlineKeyboardButton(text="ɴᴇxᴛ >>" , callback_data=f"help_page {page + 1}"))
 
 if nav_buttons:
     current_buttons.append(nav_buttons)
