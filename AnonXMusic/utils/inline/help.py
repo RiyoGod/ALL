@@ -7,7 +7,7 @@ from AnonXMusic import app
 
 BUTTONS_PER_PAGE = 15
 
-def help_pannel(, page: int = 0, START: Union[bool, int] = None): first = [InlineKeyboardButton(text=["CLOSE_BUTTON"], callback_data="close")] second = [ InlineKeyboardButton( text=_["BACK_BUTTON"], callback_data="settingsback_helper", ), ] mark = second if START else first
+def help_pannel(_, page: int = 0, START: Union[bool, int] = None):
 
 buttons = [
     InlineKeyboardButton(text=_["H_B_1"], callback_data="help_callback hb1"),
