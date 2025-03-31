@@ -19,7 +19,7 @@ async def get_ai_response(prompt: str):
 async def ai_command(_, message):
     prompt = message.text.split(None, 1)[1] if len(message.text.split()) > 1 else None
     if not prompt:
-        return await message.reply_text("<b>ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴘʀᴏᴍᴘᴛ.</b>", parse_mode="html")
+        return await message.reply_text("<b>ᴘʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴘʀᴏᴍᴘᴛ.</b>")
 
     ai_response = await get_ai_response(prompt)
     response_text = f"<b>ᴋɪʏᴏᴍɪ ᴀɪ</b>\n\n{ai_response}"
