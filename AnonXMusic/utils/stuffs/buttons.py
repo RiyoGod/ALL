@@ -2,16 +2,16 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from pyrogram import Client, filters, enums 
 
 class BUTTONS(object):
-    MBUTTON = [[InlineKeyboardButton("ᴍᴀɴᴀɢᴇᴍᴇɴᴛ", callback_data="mplus HELP_Group"), 
+    MBUTTON = [[InlineKeyboardButton("ɢʀᴏᴜᴘ", callback_data="mplus HELP_Group"), 
     InlineKeyboardButton("sᴛɪᴄᴋᴇʀs", callback_data="mplus HELP_Sticker"),
     InlineKeyboardButton("ᴀɪ-ʜᴇʟᴘ", callback_data="mplus HELP_ChatGPT")],
     [InlineKeyboardButton("ɪɴꜰᴏ", callback_data="mplus HELP_Info"), 
     InlineKeyboardButton("ᴛᴀɢ-ᴀʟʟ", callback_data="mplus HELP_TagAll"),
     InlineKeyboardButton("ᴇxᴛʀᴀs", callback_data="mplus HELP_Extra")],
     [InlineKeyboardButton("ʙᴀɴ-ᴜɴʙᴀɴ", callback_data="mplus HELP_Action"),
-    InlineKeyboardButton("Sᴇᴀʀᴄʜ", callback_data="mplus HELP_Search"),
-    InlineKeyboardButton("Iᴍᴀɢᴇ", callback_data="mplus HELP_Image")],    
-    [InlineKeyboardButton("Ⓣ-ɢʀᴀᴘʜ", callback_data="mplus HELP_TG"),
+    InlineKeyboardButton("ɢᴏᴏɢʟᴇ", callback_data="mplus HELP_Search"),
+    InlineKeyboardButton("ɪᴍᴀɢᴇ", callback_data="mplus HELP_Image")],    
+    [InlineKeyboardButton("ᴛɢᴍ", callback_data="mplus HELP_TG"),
     InlineKeyboardButton("ɢᴀᴍᴇs", callback_data="mplus HELP_Game"),
     InlineKeyboardButton("ғᴏɴᴛ", callback_data="mplus HELP_Font")],
     [InlineKeyboardButton("ᴛʀᴜᴛʜ-ᴅᴀʀᴇ", callback_data="mplus HELP_TD"),
