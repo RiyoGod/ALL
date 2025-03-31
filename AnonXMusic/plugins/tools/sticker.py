@@ -30,13 +30,13 @@ def generate_sticker(client, message):
 async def _packkang(app :app,message):  
     txt = await message.reply_text("<b>ᴘʀᴏᴄᴇssɪɴɢ....</b>")
     if not message.reply_to_message:
-        await txt.edit('ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ')
+        await txt.edit('<b>ʀᴇᴘʟʏ ᴛᴏ ᴍᴇssᴀɢᴇ</b>')
         return
     if not message.reply_to_message.sticker:
-        await txt.edit('ʀᴇᴘʟʏ ᴛᴏ sᴛɪᴄᴋᴇʀ')
+        await txt.edit('<b>ʀᴇᴘʟʏ ᴛᴏ sᴛɪᴄᴋᴇʀ</b>')
         return
     if message.reply_to_message.sticker.is_animated or  message.reply_to_message.sticker.is_video:
-        return await txt.edit("ʀᴇᴘʟʏ ᴛᴏ ᴀ ɴᴏɴ-ᴀɴɪᴍᴀᴛᴇᴅ sᴛɪᴄᴋᴇʀ")
+        return await txt.edit("<b>ʀᴇᴘʟʏ ᴛᴏ ᴀ ɴᴏɴ-ᴀɴɪᴍᴀᴛᴇᴅ sᴛɪᴄᴋᴇʀ</b>")
     if len(message.command) < 2:
         pack_name =  f'{message.from_user.first_name}_sticker_pack_by_@{BOT_USERNAME}'
     else :
@@ -84,15 +84,17 @@ async def _packkang(app :app,message):
 @app.on_message(filters.command(["stickerid","stid"]))
 async def sticker_id(app: app, msg):
     if not msg.reply_to_message:
-        await msg.reply_text("Reply to a sticker")        
+        await msg.reply_text("<b>Reply to a sticker</b>", parse_mode="html")        
     elif not msg.reply_to_message.sticker:
-        await msg.reply_text("Reply to a sticker")        
+        await msg.reply_text("<b>Reply to a sticker</b>", parse_mode="html")        
     st_in = msg.reply_to_message.sticker
     await msg.reply_text(f"""
-⊹ <u>**sᴛɪᴄᴋᴇʀ ɪɴғᴏ**</u> ⊹
-**⊚ sᴛɪᴄᴋᴇʀ ɪᴅ **: `{st_in.file_id}`\n
-**⊚ sᴛɪᴄᴋᴇʀ ᴜɴɪǫᴜᴇ ɪᴅ **: `{st_in.file_unique_id}`
-""")
+<b>⊹ sᴛɪᴄᴋᴇʀ ɪɴғᴏ ⊹</b>
+
+<b>⊚ sᴛɪᴄᴋᴇʀ ɪᴅ:</b> <code>{st_in.file_id}</code>
+
+<b>⊚ sᴛɪᴄᴋᴇʀ ᴜɴɪǫᴜᴇ ɪᴅ:</b> <code>{st_in.file_unique_id}</code>
+""", parse_mode="html")
 
 
 #####
