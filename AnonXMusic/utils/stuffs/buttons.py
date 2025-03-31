@@ -21,5 +21,5 @@ class BUTTONS(object):
     InlineKeyboardButton("ғᴜɴ", callback_data="mplus HELP_Fun"),
     InlineKeyboardButton("ᴛᴛs", callback_data="mplus HELP_TTS")],          
     [InlineKeyboardButton("", callback_data=f"managebot123 settings_back_helper"), 
-    InlineKeyboardButton("< ᴘʀᴇᴠ", callback_data=f"settings_back_helper")]
+    InlineKeyboardButton("◆ ʙᴀᴄᴋ ◆", callback_data=f"settings_back_helper")]
 ]
